@@ -29,9 +29,8 @@ jobs:
       - name: Authenticate with Salesforce
         run: |
           echo "${{ secrets.SF_JWT_KEY_FILE }}" > jwt.key
-          sfdx force:auth:jwt:grant --clientid ${{ secrets.SF_CLIENT_ID }} --jwtkeyfile jwt.key --username ${{ secrets.SF_USERNAME }} --setdefaultdevhubusername
+          sfdx force:auth:jwt:grant --client-id ${{ secrets.SF_CLIENT_ID }} --jwt-key-file jwt.key --username ${{ secrets.SF_USERNAME }} --set-default-dev-hub
         env:
-          SF_USERNAME: ${{ secrets.SF_USERNAME }}
           SFDX_DISABLE_DDA: true
 
       - name: Deploy to Salesforce
