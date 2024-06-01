@@ -26,10 +26,14 @@ jobs:
           sfdx plugins --core
         shell: bash
 
+      - name: Debug JWT Key
+        run: cat server.key
+      
+
       - name: Authenticate with Salesforce
         run: |
-          echo "${{ secrets.SF_JWT_KEY_FILE }}" > jwt.key
-          sfdx force:auth:jwt:grant --client-id ${{ secrets.SF_CLIENT_ID }} --jwt-key-file jwt.key --username ${{ secrets.SF_USERNAME }} --set-default-dev-hub
+          echo "${{ secrets.SF_JWT_KEY_FILE }}" > server.key
+          sfdx force:auth:jwt:grant --client-id ${{ secrets.SF_CLIENT_ID }} --jwt-key-file server.key --username ${{ secrets.SF_USERNAME }} --set-default-dev-hub
         env:
           SFDX_DISABLE_DDA: true
 
